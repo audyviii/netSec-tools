@@ -2,51 +2,46 @@ import os
 import time
 import sys
 
-print('Welcome... This program is an iteration/comination tool based on user input')
-time.sleep(.5)
-print('Please type new file name... ')
-filename = input('-> ')
+def intro_inputs():
+    ''' This function is used to collect folder and file input variables '''
 
-try:
-    os.makedirs('C0MB0') 
-except FileExistsError:
-    print('You already have a file with this name. The previous data will be overwritten-- for now. ')
-    time.sleep(1.5)
+    global file_name, folder_name 
+    print('Welcome... This program is an input-based iterator tool. \n')
+    time.sleep(.5)
 
-print('\n')
-os.chdir('C0MB0')
-print('Enter adjective... (case-sensitive)')
-adj = input()
-print('Enter noun... (case-sensitive)')
-noun = input()
-time.sleep(1.25)
-text = (adj + noun)
+    # Naming the folder/directory that we will store a file within
+    folder_name = input('Please type new folder name...  ')
 
-#print('Creating a file... What would you like to name it?')
-#filename = input()
+    # Error checking for existing
+    try:
+        os.makedirs(f'{folder_name}')
+    except FileExistsError:
+        time.sleep(.5) 
+        print('The one you entered already exists... Please try again. \n')
+        time.sleep(.5)
+        return intro_inputs() 
 
+    file_name = input('Please type new file name...   ')
+    move_dir = os.chdir(folder_name) # moving directory to created directory 
 
-# number iterations w/ concatenation
-f= open("{}.txt".format(filename),"w+")
-x = 0
-while x < 10:
-    f.write(text + str(0) + str(0) + str(x) + '\n')
-    x = x + 1
+def input_words():
+    ''' A small function that is focused on recieving two words in both order to be iterated with '''
+    
+    global text, flipped_text
+    adj = input('Enter first word... (case-sensitive) ')
+    noun = input('Enter noun... (case-sensitive) ')
+    time.sleep(.5)
+    text = (adj + noun)
+    flipped_text = (noun + adj)  
 
-x = 10
-while x < 100:
-    f.write(text + str(00) + str(x) + '\n')
-    x = x + 1
+   
+intro_inputs() 
+input_words()
 
-x = 100
-while x < 1000:
-    f.write(text + str(x) + '\n')
-    x = x + 1
-f.close()
+with open('{}.txt'.format(file_name),'w+') as f:
+    numbers = [f'{i:03}' for i in range(1000)]
+    for num in numbers:
+        f.write(f'{text}' + num + '\n')
+        f.write(f'{flipped_text}' + num + '\n')
 
-f= open("readme.txt","w+")
-f.write('''This is a README. This is a test.
-''')
-f.close()
-time.sleep(1.5)
-print('Success! Please check C0MB0')
+print('Success!')
