@@ -1,17 +1,17 @@
 import itertools
-import time
+from time import sleep
 
-print('Iterator \n')
+print('Iterator \n') # title
 
-DATA = input('Type letters, numbers, symbols for iteration. \n')
-DATA_len = len(DATA)
+DATA = input('Enter characters to iterate all combinations... \n')
+print('Note: Consider character length and storage... \n')
+DATA_length = len(DATA) 
 
-with open('Results.txt', 'w+') as quickie:
-    result = itertools.product(DATA, repeat=int(DATA_len))
+with open('Results.txt', 'w+') as f:
+    result = itertools.product(DATA, repeat=int(DATA_length))
     for item in result:
-        #print(''.join(item))
-        quickie.write(''.join(item) + '\n')
+        f.write(''.join(item) + '\n')
 
-time.sleep(2)
+sleep(1)
 
-print('Finished! Check directory for \'Result.txt\'. \n')
+print('Success! Check \'Iterations-Results.txt\'. \n')
