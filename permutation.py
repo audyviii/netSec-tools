@@ -4,7 +4,10 @@ from time import sleep
 print('Iterator \n') # title
 
 DATA = input('Enter characters to iterate all combinations... \n')
+
+# Please consider your processing power 
 print('Note: Consider character length and storage... \n')
+
 DATA_length = len(DATA) 
 
 with open('Results.txt', 'w+') as f:
