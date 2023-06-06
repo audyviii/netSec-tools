@@ -3,7 +3,7 @@ import sys
 import os
 from time import sleep
 
-print('Iterator\n')  
+print('Character Combinations Generator\n')  
 
 DATA = input('Enter characters to iterate all combinations: \n')
 
@@ -25,4 +25,3 @@ try:
 except Exception as e:
     print('An error occurred:', e)
     sys.exit(1)
-
